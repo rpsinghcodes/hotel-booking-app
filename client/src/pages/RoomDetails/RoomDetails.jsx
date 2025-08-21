@@ -18,7 +18,6 @@ export default function RoomDetails() {
 		room && setRoom(room);
 		room && setMainImage(room.images[0]);
 	}, []);
-	console.log({ id, room });
 	return (
 		room && (
 			<div className='py-28 md:py-35 px-4 md:px-16 lg:px-24 xl:px-32'>
@@ -132,7 +131,7 @@ export default function RoomDetails() {
 							/>
 						</div>
 					</div>
-					<button className='bg-[#2563EB] hover:bg-primary-dull active:scale-95 transition-all text-white rounded-md max-md:w-full max-md:mt-6 md:px-25 py-3 md:py-4 text-base cursor-pointer'>
+					<button className='bg-primary hover:bg-primary-dull active:scale-95 transition-all text-white rounded-md max-md:w-full max-md:mt-6 md:px-25 py-3 md:py-4 text-base cursor-pointer'>
 						Check Availability
 					</button>
 				</form>
