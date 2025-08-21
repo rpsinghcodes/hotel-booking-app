@@ -7,6 +7,10 @@ import AllRooms from "./pages/AllRooms/AllRooms";
 import RoomDetails from "./pages/RoomDetails/RoomDetails";
 import MyBooking from "./pages/MyBooking/MyBooking";
 import Registration from "./pages/Registration";
+import Layout from "./pages/Admin/Layout";
+import Dashboard from "./pages/Admin/Component/Dashboard";
+import AddRoom from "./pages/Admin/Component/AddRoom";
+import ListRoom from "./pages/Admin/Component/ListRoom";
 
 export default function App() {
 	const isOwnerPath = useLocation().pathname.includes("owner");
@@ -21,6 +25,12 @@ export default function App() {
 					<Route path='/rooms' element={<AllRooms />} />
 					<Route path='/rooms/:id' element={<RoomDetails />} />
 					<Route path='/my-bookings' element={<MyBooking />} />
+					<Route path='/owner' element={<Layout />}>
+						<Route index element={<Dashboard />} />
+						<Route path="add-room" element={<AddRoom />} />
+						<Route path="list-room" element={<ListRoom />} />
+						
+					</Route>
 				</Routes>
 			</div>
 			<Footer />

@@ -41,7 +41,6 @@ const Navbar = () => {
 	const location = useLocation();
 
 	const isHome = location.pathname === "/";
-	console.log({ isHome });
 
 	useEffect(() => {
 		const handleScroll = () => {
