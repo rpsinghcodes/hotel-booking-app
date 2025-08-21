@@ -4,6 +4,8 @@ import cors from "cors";
 import connectDB from "./configs/db.js";
 import { clerkMiddleware } from "@clerk/express";
 import clerkWebhooks from "./controllers/clerkWebhooks.js";
+import cron from "node-cron";
+
 connectDB();
 
 const app = express();
@@ -12,6 +14,10 @@ app.use(cors());
 
 app.use(express.json());
 app.use(clerkMiddleware());
+
+cron.schedule("0 * * * *", () => {
+	console.log("Running every 1 hour: ", new Date().toLocaleString());
+});
 
 // API to listen to clerk webhooks
 
