@@ -28,8 +28,8 @@ export default function Testimonial() {
 			/>
 
 			<div className='flex flex-wrap items-center justify-center gap-6 mt-20'>
-				{testimonials.map((testimonial) => (
-					<div key={testimonial.id} className='bg-white p-6 rounded-xl shadow'>
+				{testimonials.map((testimonial, index) => (
+					<div key={index} className='bg-white p-6 rounded-xl shadow'>
 						<div className='flex items-center gap-3'>
 							<img
 								className='w-12 h-12 rounded-full'

@@ -8,6 +8,7 @@ export default function StarRating({ rating = 4 }) {
 				.fill("")
 				.map((_, index) => (
 					<img
+						key={index}
 						src={
 							rating > index ? assets.starIconFilled : assets.starIconOutlined
 						}

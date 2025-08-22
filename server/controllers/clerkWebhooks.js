@@ -6,7 +6,7 @@ const clerkWebhooks = async (req, res) => {
 		const whook = new Webhook(process.env.CLERK_WEBHOOk_SECRET);
 		const headers = {
 			"svix-id": req.headers["svix-id"],
-			"svix-timestamps": req.headers["timestamps"],
+			"svix-timestamp": req.headers["svix-timestamp"],
 			"svix-signature": req.headers["svix-signature"],
 		};
 
@@ -32,11 +32,16 @@ const clerkWebhooks = async (req, res) => {
 				break;
 			}
 
+			case "user.deleted": {
+				await User.findByIdAndDelete(data.id);
+				break;
+			}
+
 			default:
 				break;
 		}
 
-		res.json({ success: true, message: "Webhook Recieved" });
+		return res.json({ success: true, message: "Webhook Recieved" });
 	} catch (error) {
 		console.log(error.message);
 		res.json({ success: false, message: error.message });

@@ -1,10 +1,51 @@
-import React from "react";
+import React, { useState } from "react";
 import { assets, cities } from "../../assets/assets";
+import { useAppContext } from "../../context/AppContext";
+import toast from "react-hot-toast";
 
 export default function Registration() {
+	const { setShowHotelReg, axios, getToken, setIsOwner } = useAppContext();
+	const [name, setName] = useState("");
+	const [address, setAddress] = useState("");
+	const [contact, setContact] = useState("");
+	const [city, setCity] = useState("");
+
+	const onSubmitHandler = async (event) => {
+		try {
+			event.preventDefault();
+			const { data } = await axios.post(
+				`/api/hotels/`,
+				{
+					name,
+					contact,
+					address,
+					city,
+				},
+				{ headers: { Authorization: `Bearer ${await getToken()}` } }
+			);
+
+			if (data.success) {
+				toast.success(data.message);
+				setIsOwner(true);
+				setShowHotelReg(false);
+			} else {
+				toast.error(data.message);
+			}
+		} catch (error) {
+			toast.error(error.message);
+		}
+	};
+
 	return (
-		<div className='fixed top-0 bottom-0 left-0 right-0 z-100 flex items-center justify-center bg-black/70'>
-			<form className='flex bg-white rounded-xl max-w-4xl max-md:mx-2'>
+		<div
+			onClick={() => setShowHotelReg(false)}
+			className='fixed top-0 bottom-0 left-0 right-0 z-100 flex items-center justify-center bg-black/70'
+		>
+			<form
+				className='flex bg-white rounded-xl max-w-4xl max-md:mx-2'
+				onSubmit={onSubmitHandler}
+				onClick={(e) => e.stopPropagation()}
+			>
 				<img
 					src={assets.regImage}
 					alt='reg-image'
@@ -15,6 +56,7 @@ export default function Registration() {
 						src={assets.closeIcon}
 						alt='close-icon'
 						className='absolute top-4 right-4 h-4 w-4 cursor-pointer'
+						onClick={() => setShowHotelReg(false)}
 					/>
 					<p className='text-2xl font-semibold'>Register Your Hotel</p>
 					{/* Hotel Name */}
@@ -30,6 +72,8 @@ export default function Registration() {
 							type='text'
 							placeholder='Type here'
 							className='border border-gray-200 rounded w-full px-3 py-2.5 mt-1 outline-indigo-500 font-light'
+							onChange={(e) => setName(e.target.value)}
+							value={name}
 							required
 						/>
 					</div>
@@ -43,6 +87,8 @@ export default function Registration() {
 							placeholder='Type here'
 							id='contact'
 							className='border border-gray-200 rounded w-full px-3 py-2.5 mt-1 outline-indigo-500 font-light'
+							onChange={(e) => setContact(e.target.value)}
+							value={contact}
 							required
 						/>
 					</div>
@@ -55,6 +101,8 @@ export default function Registration() {
 							placeholder='Type here'
 							id='address'
 							className='border border-gray-200 rounded w-full px-3 py-2.5 mt-1 outline-indigo-500 font-light'
+							onChange={(e) => setAddress(e.target.value)}
+							value={contact}
 							required
 						/>
 					</div>
@@ -65,6 +113,8 @@ export default function Registration() {
 						<select
 							id='city'
 							className='border border-gray-200 rounded w-full px-3 py-2.5 mt-1 outline-indigo-500 font-light'
+							onChange={(e) => setCity(e.target.value)}
+							value={city}
 							required
 						>
 							<option value=''>Select City</option>
