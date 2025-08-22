@@ -1,8 +1,14 @@
 import React, { useState } from "react";
 import Title from "../../../component/Title/Title";
 import { assets } from "../../../assets/assets";
+import { useAppContext } from "../../../context/AppContext";
+import toast from "react-hot-toast";
 
 export default function AddRoom() {
+	const { axios, getToken } = useAppContext();
+
+	const [loading, setLoading] = useState(false);
+
 	const [images, setImages] = useState({
 		1: null,
 		2: null,
@@ -20,8 +26,30 @@ export default function AddRoom() {
 			"Pool Access": false,
 		},
 	});
+
+	const onSubmitHandler = async (e) => {
+		e.preventDefault();
+		// check if all inputs are filled
+
+		if (
+			!inputs.roomType ||
+			!inputs.pricing ||
+			!inputs.amenities ||
+			!Object.values(images).some((image) => image)
+		) {
+			toast.error('Please fill in all the details');
+		}
+		setLoading(true);
+		try {
+			const formData = new FormData();
+			formData
+		} catch (error) {
+			
+		}
+	};
+
 	return (
-		<form>
+		<form onSubmit={onSubmitHandler}>
 			<Title
 				align='left'
 				font='outfit'
@@ -90,7 +118,7 @@ export default function AddRoom() {
 				{Object.keys(inputs.amenities).map((amenity, index) => (
 					<div key={index}>
 						<input
-						className="mr-1"
+							className='mr-1'
 							type='checkbox'
 							id={`amenities${index + 1}`}
 							checked={inputs.amenities[amenity]}
