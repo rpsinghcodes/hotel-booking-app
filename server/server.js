@@ -7,8 +7,12 @@ import clerkWebhooks from "./controllers/clerkWebhooks.js";
 import cron from "node-cron";
 import userRouter from "./routes/userRoutes.js";
 import hotelRoutes from "./routes/hotelRoutes.js";
+import connectCloudinary from "./configs/cloudinary.js";
+import roomRouter from "./routes/roomRoutes.js";
+import bookingRouter from "./routes/bookingRoutes.js";
 
 connectDB();
+connectCloudinary();
 
 const app = express();
 
@@ -31,6 +35,8 @@ app.get("/", (req, res) => {
 
 app.use("/api/user", userRouter);
 app.use("/api/hotels", hotelRoutes);
+app.use("/api/rooms", roomRouter);
+app.use('/api/booking', bookingRouter);
 
 const PORT = process.env.PORT || 3000;
 
