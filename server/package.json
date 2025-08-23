@@ -20,6 +20,7 @@
 		"mongoose": "^8.17.2",
 		"multer": "^2.0.2",
 		"node-cron": "^4.2.1",
+		"nodemailer": "^7.0.5",
 		"svix": "^1.74.1"
 	}
 }

@@ -1,9 +1,40 @@
 import React, { useState } from "react";
 import Title from "../../../component/Title/Title";
 import { assets, dashboardDummyData } from "../../../assets/assets";
+import { useAppContext } from "../../../context/AppContext";
+import toast from "react-hot-toast";
+import { useEffect } from "react";
 
 export default function Dashboard() {
-	const [dashboardData, setDashboardData] = useState(dashboardDummyData);
+	const { currency, user, getToken, axios } = useAppContext();
+	const [dashboardData, setDashboardData] = useState({
+		bookings: [],
+		totalBookings: 0,
+		totalRevenue: 0,
+	});
+	const fetchDashboardData = async () => {
+		try {
+			const { data } = await axios.get("/api/bookings/hotel", {
+				headers: {
+					Authorization: `Bearer ${await getToken()}`,
+				},
+			});
+			if (data.success) {
+				console.log({ data });
+				setDashboardData(data.dashboardData);
+			} else {
+				toast.error(data.message);
+			}
+		} catch (error) {
+			toast.error(error.message);
+		}
+	};
+
+	useEffect(() => {
+		if (user) {
+			fetchDashboardData();
+		}
+	}, [user]);
 	return (
 		<div>
 			<Title

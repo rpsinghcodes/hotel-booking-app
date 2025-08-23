@@ -19,8 +19,8 @@ export default function HotelCard({
 		>
 			<img
 				src={images[0]}
-				alt=''
-				className='relative max-w-70 w-full rounded-xl overflow-hidden bg-white text-gray-500/90 shadow-[0px_4px_4px_rgba(0,0,0,0.05)]'
+				alt='hotel-image'
+				className='relative max-w-70 w-full rounded-xl overflow-hidden bg-white text-gray-500/90 shadow-[0px_4px_4px_rgba(0,0,0,0.05)] object-cover h-52'
 			/>
 			{bestSeller ? (
 				<p className='px-3 py-1 absolute top-3 left-3 text-xs bg-white text-gray-800 font-medium rounded-full'>

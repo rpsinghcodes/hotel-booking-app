@@ -1,9 +1,35 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Title from "../../component/Title/Title";
-import { assets, userBookingsDummyData } from "../../assets/assets";
+import { assets } from "../../assets/assets";
+import { useAppContext } from "../../context/AppContext";
 
 export default function MyBooking() {
-	const [bookings, setBookings] = useState(userBookingsDummyData);
+	const [bookings, setBookings] = useState([]);
+	const { user, getToken, axios, toast } = useAppContext();
+
+	const fetchBookings = async () => {
+		try {
+			const { data } = await axios.get("/api/bookings/user", {
+				headers: {
+					Authorization: `Bearer ${await getToken()}`,
+				},
+			});
+
+			if (data.success) {
+				setBookings(data.bookings);
+			} else {
+				toast.error(data.message);
+			}
+		} catch (error) {
+			toast.error(error.message);
+		}
+	};
+
+	useEffect(() => {
+		if (user) {
+			fetchBookings();			
+		}
+	}, [user]);
 	return (
 		<div className='py-28 md:pb-35 md:pt-32 px-4 md:px-16 lg:px-24 xl:px-32 '>
 			<Title

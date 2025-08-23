@@ -1,9 +1,44 @@
 import React from "react";
 import { assets, cities } from "../../assets/assets";
+import { useState } from "react";
+import { useAppContext } from "../../context/AppContext";
 
 const SearchBooking = () => {
+	const { navigate, getToken, axios, setSearchedCities } = useAppContext();
+	const [destination, setDestination] = useState("");
+
+	const onSearch = async (e) => {
+		e.preventDefault();
+		navigate(`/rooms?destination=${destination}`);
+
+		// call api to save recent searched city
+
+		await axios.post(
+			"/api/user/store-recent-search",
+			{
+				recentSearchedCity: destination,
+			},
+			{
+				headers: {
+					Authorization: `Bearer ${await getToken()}`,
+				},
+			}
+		);
+
+		setSearchedCities((prev) => {
+			const updatedSearchedCities = [...prev, destination];
+			if (updatedSearchedCities.length > 3) {
+				updatedSearchedCities.shift();
+			}
+			return updatedSearchedCities;
+		});
+	};
+
 	return (
-		<form className='bg-white text-gray-500 rounded-lg px-6 py-4  flex flex-col md:flex-row max-md:items-start gap-4 max-md:mx-auto mt-8'>
+		<form
+			onSubmit={onSearch}
+			className='bg-white text-gray-500 rounded-lg px-6 py-4  flex flex-col md:flex-row max-md:items-start gap-4 max-md:mx-auto mt-8'
+		>
 			<div>
 				<div className='flex items-center gap-2'>
 					<img src={assets.calenderIcon} alt='' className='h-4' />
@@ -15,6 +50,8 @@ const SearchBooking = () => {
 					type='text'
 					className=' rounded border border-gray-200 px-3 py-1.5 mt-1.5 text-sm outline-none'
 					placeholder='Type here'
+					onChange={(e) => setDestination(e.target.value)}
+					value={destination}
 					required
 				/>
 				<datalist id='destinations'>

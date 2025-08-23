@@ -1,9 +1,49 @@
 import React, { useState } from "react";
-import { roomsDummyData } from "../../../assets/assets";
+// import { roomsDummyData } from "../../../assets/assets"; // Dummy Data
 import Title from "../../../component/Title/Title";
+import { useAppContext } from "../../../context/AppContext";
+import { useEffect } from "react";
+import toast from "react-hot-toast";
 
 export default function ListRoom() {
-	const [rooms, setRooms] = useState(roomsDummyData);
+	const [rooms, setRooms] = useState([]);
+	const { axios, getToken, user } = useAppContext();
+	const fetchRooms = async () => {
+		try {
+			const { data } = await axios.get("api/rooms/owner", {
+				headers: {
+					Authorization: `Bearer ${await getToken()}`,
+				},
+			});
+			const { rooms = [] } = data;
+			setRooms(rooms);
+		} catch (error) {
+			toast.error(error.message);
+		}
+	};
+	useEffect(() => {
+		fetchRooms();
+	}, [user]);
+
+	const toggleRoomAvailability = async (roomId) => {
+		try {
+			const { data } = await axios.post(
+				"api/rooms/toggle-availability",
+				{ roomId },
+				{
+					headers: {
+						Authorization: `Bearer ${await getToken()}`,
+					},
+				}
+			);
+			if (data.success) {
+				toast.success(data.message);
+				fetchRooms();
+			}
+		} catch (error) {
+			toast.error(error.message);
+		}
+	};
 	return (
 		<div>
 			<Title
@@ -40,7 +80,7 @@ export default function ListRoom() {
 									{item.amenities.join(", ")}
 								</td>
 								<td className='py-3 px-4 text-gray-700 border-t border-gray-300'>
-									$ {item.price}
+									$ {item.pricePerNight}
 								</td>
 								<td className='py-3 px-4 text-red-500 border-t border-gray-300 text-sm text-center'>
 									<label className='relative inline-flex items-center cursor-pointer text-gray-900 gap-3'>
@@ -48,6 +88,7 @@ export default function ListRoom() {
 											type='checkbox'
 											className='sr-only peer'
 											checked={item.isAvailable}
+											onChange={() => toggleRoomAvailability(item._id)}
 										/>
 										<div className='w-12 h-7 bg-slate-300 rounded-full peer peer-checked:bg-blue-600 transition-colors duration-200'></div>
 										<span className='dot absolute left-1 top-1 w-5 h-5 bg-white rounded-full transition-transform duration-200 ease-in-out peer-checked:translate-x-5'></span>
