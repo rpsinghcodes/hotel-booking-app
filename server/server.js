@@ -10,6 +10,8 @@ import hotelRoutes from "./routes/hotelRoutes.js";
 import connectCloudinary from "./configs/cloudinary.js";
 import roomRouter from "./routes/roomRoutes.js";
 import bookingRouter from "./routes/bookingRoutes.js";
+import { stripeWebhooks } from "./controllers/stripeWebhooks.js";
+import Awake from "./models/Awake.js";
 
 connectDB();
 connectCloudinary();
@@ -18,11 +20,21 @@ const app = express();
 
 app.use(cors());
 
+// API to listen to stripe webhooks
+app.post(
+	"/api/stripe",
+	express.raw({ type: "application/json" }),
+	stripeWebhooks
+);
+
 app.use(express.json());
 app.use(clerkMiddleware());
 
-cron.schedule("0 * * * *", () => {
-	console.log("Running every 1 hour: ", new Date().toLocaleString());
+cron.schedule("0 * * * *", async () => {
+	const awakeTime = new Date().toLocaleString();
+	console.log("Running every 1 hour: ", awakeTime);
+	// keep my mongodb always on
+	await Awake.create({ awakeTime });
 });
 
 // API to listen to clerk webhooks

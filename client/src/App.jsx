@@ -13,6 +13,7 @@ import AddRoom from "./pages/Admin/Component/AddRoom";
 import ListRoom from "./pages/Admin/Component/ListRoom";
 import { Toaster } from "react-hot-toast";
 import { useAppContext } from "./context/AppContext";
+import Loader from "./component/Loader/Loader";
 
 export default function App() {
 	const isOwnerPath = useLocation().pathname.includes("owner");
@@ -28,6 +29,7 @@ export default function App() {
 					<Route path='/rooms' element={<AllRooms />} />
 					<Route path='/rooms/:id' element={<RoomDetails />} />
 					<Route path='/my-bookings' element={<MyBooking />} />
+					<Route path='/loader/:nextUrl' element={<Loader />} />
 					<Route path='/owner' element={<Layout />}>
 						<Route index element={<Dashboard />} />
 						<Route path='add-room' element={<AddRoom />} />
