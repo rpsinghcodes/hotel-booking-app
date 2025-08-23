@@ -37,22 +37,14 @@ const roomTypes = ["Single Bed", "Double Bed", "Luxury Room", "Family Suite"];
 const priceRanges = ["0 to 500", "500 to 1000", "1000 to 2000", "2000 to 3000"];
 const sortOptions = ["Price Low to High", "Price High to Low", "Newest First"];
 
-export default function Filter() {
+export default function Filter({
+	selectedFilters,
+	handleFilterChange,
+	selectedSort,
+	onSortChange,
+	onClearFilter,
+}) {
 	const [openFilter, setOpenFilter] = useState(false);
-	const [checked, setChecked] = useState({
-		roomTypes: [],
-		priceRanges: [],
-		sort: "",
-	});
-
-	const handleChecked = (type, value) => {
-		setChecked((prev) => ({
-			...prev,
-			[type]: [type][value]
-				? [type].filter((val) => val !== value)
-				: [type].push(value),
-		}));
-	};
 	return (
 		<div className='bg-white w-80 border border-gray-300 text-gray-600 max-lg:mb-8 min-lg:mt-16'>
 			<div
@@ -68,7 +60,9 @@ export default function Filter() {
 					>
 						{openFilter ? "HIDE" : "SHOW"}
 					</span>
-					<span className='hidden lg:block'>CLEAR</span>
+					<span className='hidden lg:block' onClick={onClearFilter}>
+						CLEAR
+					</span>
 				</div>
 			</div>
 			<div
@@ -82,8 +76,10 @@ export default function Filter() {
 						<CheckBox
 							label={room}
 							key={room}
-							onChange={() => handleChecked("roomTypes", room)}
-							selected={checked[room]}
+							onChange={(checked) =>
+								handleFilterChange(checked, room, "roomType")
+							}
+							selected={selectedFilters.roomType.includes(room)}
 						/>
 					))}
 				</div>
@@ -93,8 +89,10 @@ export default function Filter() {
 						<CheckBox
 							label={` $ ${range}`}
 							key={range}
-							onChange={() => handleChecked("priceRanges", range)}
-							selected={checked[range]}
+							onChange={(checked) =>
+								handleFilterChange(checked, range, "priceRange")
+							}
+							selected={selectedFilters.priceRange.includes(range)}
 						/>
 					))}
 				</div>
@@ -104,8 +102,8 @@ export default function Filter() {
 						<RadioButton
 							label={option}
 							key={option}
-							onChange={() => handleChecked("sortOption", option)}
-							selected={checked[sortOptions]}
+							selected={selectedSort === option}
+							onChange={() => onSortChange(option)}
 						/>
 					))}
 				</div>

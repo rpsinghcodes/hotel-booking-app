@@ -59,10 +59,11 @@ export const getRooms = async (req, res) => {
 // get specific room
 export const getOwnerRooms = async (req, res) => {
 	try {
-		const hotelData = await Hotel.find({ owner: req.auth.userId });
-		const rooms = await Room.find({ hotel: hotelData._id.toString() }).populate(
-			"hotel"
-		);
+		const hotelData = await Hotel.findOne({ owner: req.auth.userId });
+		console.log(hotelData);
+		const rooms = await Room.find({
+			hotel: hotelData._id.toString(),
+		}).populate("hotel");
 
 		return res.json({ success: true, rooms });
 	} catch (error) {
