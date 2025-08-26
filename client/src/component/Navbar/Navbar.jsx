@@ -7,8 +7,6 @@ import { useAppContext } from "../../context/AppContext";
 const navLinks = [
 	{ name: "Home", path: "/" },
 	{ name: "Hotels", path: "/rooms" },
-	{ name: "Experiences", path: "/" },
-	{ name: "About", path: "/" },
 ];
 
 const BookIcon = () => (

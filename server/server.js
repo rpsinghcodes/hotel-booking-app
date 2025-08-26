@@ -30,9 +30,9 @@ app.post(
 app.use(express.json());
 app.use(clerkMiddleware());
 
-cron.schedule("0 * * * *", async () => {
+cron.schedule("*/14 * * * *", async () => {
 	const awakeTime = new Date().toLocaleString();
-	console.log("Running every 1 hour: ", awakeTime);
+	console.log("Running every 14 minute: ", awakeTime);
 	// keep my mongodb always on
 	await Awake.create({ awakeTime });
 });

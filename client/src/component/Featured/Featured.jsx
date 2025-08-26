@@ -1,5 +1,4 @@
 import React from "react";
-// import { roomsDummyData } from "../../assets/assets";
 import HotelCard from "../HotelCard/HotelCard";
 import Title from "../Title/Title";
 import { useNavigate } from "react-router-dom";

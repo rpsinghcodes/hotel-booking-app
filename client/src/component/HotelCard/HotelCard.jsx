@@ -8,7 +8,7 @@ export default function HotelCard({
 	hotelName,
 	price,
 	_id: id,
-	bestSeller = false,
+	bestSeller = true,
 	images = [],
 }) {
 	return (
@@ -22,7 +22,7 @@ export default function HotelCard({
 				alt='hotel-image'
 				className='relative max-w-70 w-full rounded-xl overflow-hidden bg-white text-gray-500/90 shadow-[0px_4px_4px_rgba(0,0,0,0.05)] object-cover h-52'
 			/>
-			{bestSeller ? (
+			{!bestSeller ? (
 				<p className='px-3 py-1 absolute top-3 left-3 text-xs bg-white text-gray-800 font-medium rounded-full'>
 					Best Seller
 				</p>
@@ -43,7 +43,7 @@ export default function HotelCard({
 				</div>
 				<div className='flex items-center justify-between mt-4'>
 					<p className='text-xl text-gray-800'>
-						<span className='text-xl text-gray-800'>{price}</span> / night
+						<span className='text-xl text-gray-800'>$ {price}</span> / night
 					</p>
 					<div>View Details</div>
 				</div>
