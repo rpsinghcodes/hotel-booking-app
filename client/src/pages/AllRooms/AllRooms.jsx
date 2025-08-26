@@ -48,7 +48,6 @@ export default function AllRooms() {
 			selectedFilters.priceRange.length === 0 ||
 			selectedFilters.priceRange.some((range) => {
 				const [min, max] = range.split(" to ").map(Number);
-				console.log({ min, max });
 				return room.pricePerNight >= min && room.pricePerNight <= max;
 			})
 		);

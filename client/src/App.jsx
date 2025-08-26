@@ -14,6 +14,7 @@ import ListRoom from "./pages/Admin/Component/ListRoom";
 import { Toaster } from "react-hot-toast";
 import { useAppContext } from "./context/AppContext";
 import Loader from "./component/Loader/Loader";
+import NotFound from "./pages/NotFound/NotFound";
 
 export default function App() {
 	const isOwnerPath = useLocation().pathname.includes("owner");
@@ -35,6 +36,7 @@ export default function App() {
 						<Route path='add-room' element={<AddRoom />} />
 						<Route path='list-room' element={<ListRoom />} />
 					</Route>
+					<Route path='*' element={<NotFound />} />
 				</Routes>
 			</div>
 			<Footer />

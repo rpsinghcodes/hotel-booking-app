@@ -1,3 +1,4 @@
+import { throwError } from "../helper/utils.js";
 import User from "../models/User.js";
 import { Webhook } from "svix";
 
@@ -24,7 +25,11 @@ const clerkWebhooks = async (req, res) => {
 
 		switch (type) {
 			case "user.created": {
-				await User.create(userData);
+				const user = await User.find({ email: userData.email });
+				if (user.length === 0) {
+					await User.create(userData);
+				}
+
 				break;
 			}
 			case "user.updated": {
@@ -41,10 +46,10 @@ const clerkWebhooks = async (req, res) => {
 				break;
 		}
 
-		return res.json({ success: true, message: "Webhook Recieved" });
+		return res.json({ success: true, message: "Webhook Received" });
 	} catch (error) {
 		console.log(error.message);
-		res.json({ success: false, message: error.message });
+		return throwError(error, res, "Failed to signup");
 	}
 };
 

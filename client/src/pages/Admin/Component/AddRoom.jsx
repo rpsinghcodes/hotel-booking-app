@@ -54,7 +54,6 @@ export default function AddRoom() {
 			Object.keys(images).forEach((key) => {
 				images[key] && formData.append("images", images[key]);
 			});
-			console.log({ formData });
 			const { data } = await axios.post("/api/rooms", formData, {
 				headers: {
 					Authorization: `Bearer ${await getToken()}`,

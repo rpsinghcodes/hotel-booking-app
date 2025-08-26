@@ -23,10 +23,6 @@ import badgeIcon from "./badgeIcon.svg";
 import menuIcon from "./menuIcon.svg";
 import closeMenu from "./closeMenu.svg";
 import guestsIcon from "./guestsIcon.svg";
-import roomImg1 from "./roomImg1.png";
-import roomImg2 from "./roomImg2.png";
-import roomImg3 from "./roomImg3.png";
-import roomImg4 from "./roomImg4.png";
 import regImage from "./regImage.png";
 import exclusiveOfferCardImg1 from "./exclusiveOfferCardImg1.png";
 import exclusiveOfferCardImg2 from "./exclusiveOfferCardImg2.png";
@@ -37,10 +33,9 @@ import listIcon from "./listIcon.svg";
 import uploadArea from "./uploadArea.svg";
 import totalBookingIcon from "./totalBookingIcon.svg";
 import totalRevenueIcon from "./totalRevenueIcon.svg";
-import heroTemp from "./hero-temp.jpg";
+import pageNotFound from "./pagenotfound.webp";
 
 export const assets = {
-	heroTemp,
 	logo,
 	searchIcon,
 	userIcon,
@@ -73,6 +68,7 @@ export const assets = {
 	uploadArea,
 	totalBookingIcon,
 	totalRevenueIcon,
+	pageNotFound,
 };
 
 export const cities = ["Dubai", "Singapore", "New York", "London"];
@@ -201,115 +197,115 @@ export const hotelDummyData = {
 };
 
 // Rooms Dummy Data
-export const roomsDummyData = [
-	{
-		_id: "67f7647c197ac559e4089b96",
-		hotel: hotelDummyData,
-		roomType: "Double Bed",
-		price: 399,
-		amenities: ["Room Service", "Mountain View", "Pool Access"],
-		images: [roomImg1, roomImg2, roomImg3, roomImg4],
-		isAvailable: true,
-		createdAt: "2025-04-10T06:26:04.013Z",
-		updatedAt: "2025-04-10T06:26:04.013Z",
-		__v: 0,
-	},
-	{
-		_id: "67f76452197ac559e4089b8e",
-		hotel: hotelDummyData,
-		roomType: "Double Bed",
-		price: 299,
-		amenities: ["Room Service", "Mountain View", "Pool Access"],
-		images: [roomImg2, roomImg3, roomImg4, roomImg1],
-		isAvailable: true,
-		createdAt: "2025-04-10T06:25:22.593Z",
-		updatedAt: "2025-04-10T06:25:22.593Z",
-		__v: 0,
-	},
-	{
-		_id: "67f76406197ac559e4089b82",
-		hotel: hotelDummyData,
-		roomType: "Double Bed",
-		price: 249,
-		amenities: ["Free WiFi", "Free Breakfast", "Room Service"],
-		images: [roomImg3, roomImg4, roomImg1, roomImg2],
-		isAvailable: true,
-		createdAt: "2025-04-10T06:24:06.285Z",
-		updatedAt: "2025-04-10T06:24:06.285Z",
-		__v: 0,
-	},
-	{
-		_id: "67f763d8197ac559e4089b7a",
-		hotel: hotelDummyData,
-		roomType: "Single Bed",
-		price: 199,
-		amenities: ["Free WiFi", "Room Service", "Pool Access"],
-		images: [roomImg4, roomImg1, roomImg2, roomImg3],
-		isAvailable: true,
-		createdAt: "2025-04-10T06:23:20.252Z",
-		updatedAt: "2025-04-10T06:23:20.252Z",
-		__v: 0,
-	},
-];
+// const roomsDummyData = [
+// 	{
+// 		_id: "67f7647c197ac559e4089b96",
+// 		hotel: hotelDummyData,
+// 		roomType: "Double Bed",
+// 		price: 399,
+// 		amenities: ["Room Service", "Mountain View", "Pool Access"],
+// 		images: [roomImg1, roomImg2, roomImg3, roomImg4],
+// 		isAvailable: true,
+// 		createdAt: "2025-04-10T06:26:04.013Z",
+// 		updatedAt: "2025-04-10T06:26:04.013Z",
+// 		__v: 0,
+// 	},
+// 	{
+// 		_id: "67f76452197ac559e4089b8e",
+// 		hotel: hotelDummyData,
+// 		roomType: "Double Bed",
+// 		price: 299,
+// 		amenities: ["Room Service", "Mountain View", "Pool Access"],
+// 		images: [roomImg2, roomImg3, roomImg4, roomImg1],
+// 		isAvailable: true,
+// 		createdAt: "2025-04-10T06:25:22.593Z",
+// 		updatedAt: "2025-04-10T06:25:22.593Z",
+// 		__v: 0,
+// 	},
+// 	{
+// 		_id: "67f76406197ac559e4089b82",
+// 		hotel: hotelDummyData,
+// 		roomType: "Double Bed",
+// 		price: 249,
+// 		amenities: ["Free WiFi", "Free Breakfast", "Room Service"],
+// 		images: [roomImg3, roomImg4, roomImg1, roomImg2],
+// 		isAvailable: true,
+// 		createdAt: "2025-04-10T06:24:06.285Z",
+// 		updatedAt: "2025-04-10T06:24:06.285Z",
+// 		__v: 0,
+// 	},
+// 	{
+// 		_id: "67f763d8197ac559e4089b7a",
+// 		hotel: hotelDummyData,
+// 		roomType: "Single Bed",
+// 		price: 199,
+// 		amenities: ["Free WiFi", "Room Service", "Pool Access"],
+// 		images: [roomImg4, roomImg1, roomImg2, roomImg3],
+// 		isAvailable: true,
+// 		createdAt: "2025-04-10T06:23:20.252Z",
+// 		updatedAt: "2025-04-10T06:23:20.252Z",
+// 		__v: 0,
+// 	},
+// ];
 
 // User Bookings Dummy Data
-export const userBookingsDummyData = [
-	{
-		_id: "67f76839994a731e97d3b8ce",
-		user: userDummyData,
-		room: roomsDummyData[1],
-		hotel: hotelDummyData,
-		checkInDate: "2025-04-30T00:00:00.000Z",
-		checkOutDate: "2025-05-01T00:00:00.000Z",
-		totalPrice: 299,
-		guests: 1,
-		status: "pending",
-		paymentMethod: "Stripe",
-		isPaid: true,
-		createdAt: "2025-04-10T06:42:01.529Z",
-		updatedAt: "2025-04-10T06:43:54.520Z",
-		__v: 0,
-	},
-	{
-		_id: "67f76829994a731e97d3b8c3",
-		user: userDummyData,
-		room: roomsDummyData[0],
-		hotel: hotelDummyData,
-		checkInDate: "2025-04-27T00:00:00.000Z",
-		checkOutDate: "2025-04-28T00:00:00.000Z",
-		totalPrice: 399,
-		guests: 1,
-		status: "pending",
-		paymentMethod: "Pay At Hotel",
-		isPaid: false,
-		createdAt: "2025-04-10T06:41:45.873Z",
-		updatedAt: "2025-04-10T06:41:45.873Z",
-		__v: 0,
-	},
-	{
-		_id: "67f76810994a731e97d3b8b4",
-		user: userDummyData,
-		room: roomsDummyData[3],
-		hotel: hotelDummyData,
-		checkInDate: "2025-04-11T00:00:00.000Z",
-		checkOutDate: "2025-04-12T00:00:00.000Z",
-		totalPrice: 199,
-		guests: 1,
-		status: "pending",
-		paymentMethod: "Pay At Hotel",
-		isPaid: false,
-		createdAt: "2025-04-10T06:41:20.501Z",
-		updatedAt: "2025-04-10T06:41:20.501Z",
-		__v: 0,
-	},
-];
+// export const userBookingsDummyData = [
+// 	{
+// 		_id: "67f76839994a731e97d3b8ce",
+// 		user: userDummyData,
+// 		room: roomsDummyData[1],
+// 		hotel: hotelDummyData,
+// 		checkInDate: "2025-04-30T00:00:00.000Z",
+// 		checkOutDate: "2025-05-01T00:00:00.000Z",
+// 		totalPrice: 299,
+// 		guests: 1,
+// 		status: "pending",
+// 		paymentMethod: "Stripe",
+// 		isPaid: true,
+// 		createdAt: "2025-04-10T06:42:01.529Z",
+// 		updatedAt: "2025-04-10T06:43:54.520Z",
+// 		__v: 0,
+// 	},
+// 	{
+// 		_id: "67f76829994a731e97d3b8c3",
+// 		user: userDummyData,
+// 		room: roomsDummyData[0],
+// 		hotel: hotelDummyData,
+// 		checkInDate: "2025-04-27T00:00:00.000Z",
+// 		checkOutDate: "2025-04-28T00:00:00.000Z",
+// 		totalPrice: 399,
+// 		guests: 1,
+// 		status: "pending",
+// 		paymentMethod: "Pay At Hotel",
+// 		isPaid: false,
+// 		createdAt: "2025-04-10T06:41:45.873Z",
+// 		updatedAt: "2025-04-10T06:41:45.873Z",
+// 		__v: 0,
+// 	},
+// 	{
+// 		_id: "67f76810994a731e97d3b8b4",
+// 		user: userDummyData,
+// 		room: roomsDummyData[3],
+// 		hotel: hotelDummyData,
+// 		checkInDate: "2025-04-11T00:00:00.000Z",
+// 		checkOutDate: "2025-04-12T00:00:00.000Z",
+// 		totalPrice: 199,
+// 		guests: 1,
+// 		status: "pending",
+// 		paymentMethod: "Pay At Hotel",
+// 		isPaid: false,
+// 		createdAt: "2025-04-10T06:41:20.501Z",
+// 		updatedAt: "2025-04-10T06:41:20.501Z",
+// 		__v: 0,
+// 	},
+// ];
 
 // Dashboard Dummy Data
-export const dashboardDummyData = {
-	totalBookings: 3,
-	totalRevenue: 897,
-	bookings: userBookingsDummyData,
-};
+// export const dashboardDummyData = {
+// 	totalBookings: 3,
+// 	totalRevenue: 897,
+// 	bookings: userBookingsDummyData,
+// };
 
 // --------- SVG code for Book Icon------
 /* 
