@@ -154,7 +154,7 @@ export const stripePayment = async (req, res) => {
 					product_data: {
 						name: roomData.hotel.name,
 					},
-					unit_amount: totalPrice * 100
+					unit_amount: totalPrice * 100,
 				},
 				quantity: 1,
 			},
@@ -162,16 +162,16 @@ export const stripePayment = async (req, res) => {
 		// create checkout sessions
 
 		const session = await stripeInstance.checkout.sessions.create({
-			line_items, 
-			mode: 'payment',
+			line_items,
+			mode: "payment",
 			success_url: `${origin}/loader/my-bookings`,
 			cancel_url: `${origin}/loader/my-bookings`,
 			metadata: {
 				bookingId,
 			},
-		})
+		});
 
-		return res.json({success: true, url: session.url});
+		return res.json({ success: true, url: session.url });
 	} catch (error) {
 		return throwError(error, res, "Payment failed");
 	}

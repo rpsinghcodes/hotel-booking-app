@@ -110,24 +110,27 @@ export default function RoomDetails() {
 				{/* Images */}
 				<div className='flex flex-col lg:flex-row mt-6 gap-6'>
 					<div className='lg:w-1/2 w-full'>
-						<img
-							src={mainImage}
-							alt='main-image'
-							className='w-full rounded-xl shadow-lg object-cover'
-						/>
+						<div className='aspect-[4/3]'>
+							<img
+								src={mainImage}
+								alt='main-image'
+								className='size-full rounded-xl shadow-lg object-cover'
+							/>
+						</div>
 					</div>
 					<div className='grid grid-cols-2 gap-4 lg:w-1/2 w-full'>
 						{room.images.length > 1 &&
 							room.images.map((image, index) => (
-								<img
-									key={index}
-									src={image}
-									alt='room-image'
-									onClick={() => setMainImage(image)}
-									className={`w-full rounded-xl shadow-md object-cover cursor-pointer ${
-										mainImage === image && "outline-3 outline-orange-500"
-									}`}
-								/>
+								<div key={index} className='aspect-[4/3]'>
+									<img
+										src={image}
+										alt='room-image'
+										onClick={() => setMainImage(image)}
+										className={`w-full h-full rounded-xl shadow-md object-cover cursor-pointer ${
+											mainImage === image && "outline-3 outline-orange-500"
+										}`}
+									/>
+								</div>
 							))}
 					</div>
 				</div>
@@ -153,7 +156,7 @@ export default function RoomDetails() {
 							))}
 						</div>
 					</div>
-					<p className='text-2xl font-medium'>${room.price}/night</p>
+					<p className='text-2xl font-medium'>${room.pricePerNight}/night</p>
 				</div>
 				{/* checkIn checkOut Form */}
 				<form

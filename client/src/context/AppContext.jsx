@@ -38,10 +38,10 @@ export const AppProvider = ({ children }) => {
 				headers: { Authorization: `Bearer ${await getToken()}` },
 			});
 			if (data.success) {
-				setIsOwner(data.role === "hotelOwner");
-				setSearchedCities(data.recentSearchedCities);
+				setIsOwner(data.role === "owner");
+				setSearchedCities(data.recentSearchedCities || []);
 			} else {
-				// Retry Fetchhing user Details;
+				// Retry Fetching user Details;
 				setTimeout(() => {
 					fetchUser();
 				}, 5000);
