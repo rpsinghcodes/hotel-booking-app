@@ -123,7 +123,7 @@ Open **two terminals**—one for backend, one for frontend.
 ```bash
 cd server
 # If your package.json has "dev": "nodemon server.js" (or index.js)
-npm run dev
+node server.js
 # Otherwise:
 # npm start
 # Or:
